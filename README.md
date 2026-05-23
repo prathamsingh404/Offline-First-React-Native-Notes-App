@@ -1,36 +1,123 @@
 # Offline-First React Native Notes App
 
-This is a complete, working React Native app designed specifically for Android. It operates entirely offline, persisting your data locally on the device so that notes remain even after the app is closed and reopened.
+A clean, fully offline React Native notes app for Android. Create, edit, and delete notes without internet — all data persists locally on-device using AsyncStorage. Close the app, reopen it, and everything is still there.
 
-## 📱 Download & Install (APK)
+## 📥 APK Download
 
-**[📥 Download the APK here (OfflineNotes.apk)](https://github.com/prathamsingh404/Offline-First-React-Native-Notes-App/releases/download/latest/OfflineNotes.apk)**
+**[Download OfflineNotes.apk](https://github.com/prathamsingh404/Offline-First-React-Native-Notes-App/releases/download/v1.0.0/OfflineNotes.apk)**
 
-### How to Install:
-1. Click the link above on your Android device to download the `OfflineNotes.apk` file.
-2. Once downloaded, tap on the file to open it.
-3. If your phone asks for permission to install apps from unknown sources, tap "Settings" and toggle "Allow from this source".
-4. Tap "Install".
-5. Once installed, tap "Open" to launch the app. The whole process takes under 5 minutes!
+### Install Instructions
+
+1. Tap the link above on your Android phone to download `OfflineNotes.apk`
+2. Open the downloaded file
+3. If prompted, allow installation from unknown sources
+4. Tap **Install**
+5. Tap **Open** — the app is ready to use
+
+> No internet, Metro server, or USB connection required. Install → Open → Done.
 
 ## ✨ Features
 
-*   **Offline-First:** No internet required. Notes are saved to device storage directly.
-*   **Persistent Storage:** Close the app, clear it from memory—your notes are safely retained.
-*   **Considered UI:** Clean design with consistent spacing, readable typography, and a logical visual hierarchy, ready for client feedback.
+- **Offline-First** — No network needed. Notes are stored on-device.
+- **Persistent Storage** — Notes survive app restarts, phone reboots, and clearing from recents.
+- **Create Notes** — Tap the + button, enter a title and body, save.
+- **Edit Notes** — Tap any note to open and edit it.
+- **Delete Notes** — Delete button on each note with confirmation dialog.
+- **Clean UI** — Consistent spacing, readable typography, logical hierarchy. Not a raw prototype — designed for client review.
 
 ## 🗂 Screens
 
-1.  **Notes List:** Displays all saved notes, each showing the title and a short preview of the body.
-2.  **Create / Edit Note:** A focused form with a title field, a body field, and a Save button.
-3.  **Delete Note:** Easily accessible note deletion (with a dedicated delete button/swipe action depending on the UI implementation).
+| Screen | Description |
+|--------|-------------|
+| **Notes List** | Displays all saved notes with title preview, body snippet, and date |
+| **Create Note** | Title field + body field + Save button in header |
+| **Edit Note** | Same form, pre-filled with existing note data |
+| **Delete** | Trash icon on each note card → confirmation alert → delete |
 
-## 🛠 Tech Stack & Scope
+## 🛠 Tech Stack
 
-*   **Framework:** React Native (via Expo)
-*   **Target:** Android Mobile App
-*   **Local Data:** `@react-native-async-storage/async-storage`
-*   **Out of Scope:** As requested, this app does **not** include a backend, API, authentication, cloud sync, or complex animations.
+| Technology | Purpose |
+|------------|---------|
+| React Native 0.81 | Cross-platform mobile framework |
+| Expo SDK 54 | Build tooling and native module management |
+| React Navigation 7 | Native stack navigation |
+| AsyncStorage | Local key-value persistence |
+| Hermes | JavaScript engine (optimized for mobile) |
+| Lucide Icons | Clean icon set |
+
+## 🏗 Run Locally
+
+### Prerequisites
+
+- Node.js 18+
+- Android Studio with Android SDK
+- JDK 17
+- An Android emulator or physical device
+
+### Steps
+
+```bash
+# Install dependencies
+npm install
+
+# Generate the android/ directory (if not present)
+npx expo prebuild -p android
+
+# Run on connected device or emulator
+npx expo run:android
+```
+
+## 📦 Build APK
+
+### Debug APK (for testing with Metro)
+
+```bash
+cd android
+./gradlew assembleDebug
+```
+
+Output: `android/app/build/outputs/apk/debug/app-debug.apk`
+
+### Release APK (standalone, no Metro needed)
+
+```bash
+cd android
+./gradlew assembleRelease
+```
+
+Output: `android/app/build/outputs/apk/release/app-release.apk`
+
+> The release build bundles the JavaScript and all assets directly into the APK. It runs independently on any Android phone.
+
+## 📁 Project Structure
+
+```
+├── App.js                    # Root component
+├── index.js                  # Entry point
+├── app.json                  # Expo configuration
+├── package.json              # Dependencies
+├── src/
+│   ├── AppNavigator.js       # Navigation setup
+│   ├── screens/
+│   │   ├── NotesListScreen.js
+│   │   └── NoteEditorScreen.js
+│   ├── components/
+│   │   └── NoteItem.js
+│   └── hooks/
+│       └── useNotes.js       # AsyncStorage CRUD logic
+├── android/                  # Native Android project
+└── .github/workflows/
+    └── build-apk.yml         # CI: auto-build APK on push
+```
+
+## 🚫 Out of Scope
+
+This is a focused offline-first app. The following are intentionally excluded:
+
+- No backend / API / cloud sync
+- No authentication
+- No complex animations or transitions
 
 ---
-*Submission for Part A.*
+
+*Built with React Native + Expo. Submission for Part A.*

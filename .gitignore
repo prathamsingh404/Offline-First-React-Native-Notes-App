@@ -38,4 +38,13 @@ yarn-error.*
 
 # generated native folders
 /ios
-/android
+
+# Gradle build outputs (keep config, ignore builds)
+android/.gradle/
+android/app/build/
+android/build/
+
+# Temp files
+runs.json
+jobs.json
+web_output.log
